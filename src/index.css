@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #f58220;    /* BP Orange */
+  --color-secondary: #3d1a10;  /* BP Deep Brown */
+  --color-accent: #ff9a4d;     /* Lighter Orange */
+  
+  --font-sans: "Outfit", "Inter", system-ui, sans-serif;
+  
+  --animate-fade-in: fadeIn 0.4s ease-out;
+  --animate-slide-up: slideUp 0.5s ease-out;
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+  }
+
+  @keyframes formSectionReveal {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+}
+
+@layer base {
+  :root {
+    /* MODE CLAIR PUR (Banque Populaire) */
+    --bg-page: #f8fafc;        /* Gris très très clair pour le fond global */
+    --bg-card: #ffffff;        /* Blanc Pur pour le contenu */
+    --bg-card-hover: #f1f5f9;  /* Gris super léger au hover */
+    --bg-input: #ffffff;       /* Blanc Pur */
+    
+    --text-primary: #0f172a;   /* Noir / Anthracite profond pour lisibilité parfaite */
+    --text-secondary: #475569; /* Gris foncé pour le texte secondaire */
+    --text-muted: #64748b;     /* Gris moyen pour dates/notes */
+    
+    --border-color: rgba(15, 23, 42, 0.1); 
+    --border-focus: rgba(245, 130, 32, 0.4); /* Glow Orange */
+    --glass-opacity: 0.8;
+  }
+
+  body {
+    @apply antialiased transition-colors duration-300;
+    font-family: var(--font-sans);
+    background-color: var(--bg-page);
+    color: var(--text-primary);
+  }
+  
+  ::selection {
+    background-color: rgba(245, 130, 32, 0.3);
+    color: inherit;
+  }
+
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-1.5 h-1.5;
+  }
+  ::-webkit-scrollbar-track {
+    background-color: var(--bg-page);
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--border-color);
+    @apply rounded-full transition-colors;
+  }
+}
+
+@layer components {
+  .animate-form-section {
+    animation: formSectionReveal 0.2s ease-out;
+  }
+
+  /* Premium Card Styles using CSS Variables */
+  .glass-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    @apply rounded-3xl shadow-lg transition-colors duration-300;
+  }
+  
+  .btn-primary {
+    @apply bg-primary hover:bg-accent text-white px-5 py-2.5 rounded-xl font-medium transition-all duration-300 shadow-lg shadow-primary/20 hover:shadow-primary/40 active:scale-[0.98];
+  }
+
+  .input-field {
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    @apply w-full rounded-xl px-4 py-2.5 outline-none focus:border-primary/50 focus:ring-4 focus:ring-primary/10 transition-all placeholder:text-slate-400;
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: var(--border-color);
+  border-radius: 10px;
+}
